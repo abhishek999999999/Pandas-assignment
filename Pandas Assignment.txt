@@ -1,0 +1,423 @@
+Q1. How do you load a CSV file into a Pandas DataFrame?
+
+--> import pandas as pd
+df = pd.read_csv("data.csv")
+print(df)
+
+Q2. How do you check the data type of a column in a Pandas DataFrame?
+
+--> You can now check the data type of all columns in the DataFrame by adding df.dtypes to the code:
+
+df.dtypes
+
+Q3. How do you select rows from a Pandas DataFrame based on a condition?
+
+-->  Method 1: Select Rows where Column is Equal to Specific Value
+df.loc[df['col1'] == value]
+Method 2: Select Rows where Column Value is in List of Values
+df.loc[df['col1'].isin([value1, value2, value3, ...])]
+
+Q4. How do you rename columns in a Pandas DataFrame?
+
+-->   Using rename () function
+     pandas.DataFrame.rename() function.
+
+Q5. How do you drop columns in a Pandas DataFrame?
+
+--> df = df.drop('column_name', axis=1)
+
+Q6. How do you find the unique values in a column of a Pandas DataFrame?
+
+--> # Import pandas package 
+import pandas as pd
+  
+# create a dictionary with five fields each
+data = {
+    'A':['A1', 'A2', 'A3', 'A4', 'A5'], 
+    'B':['B1', 'B2', 'B3', 'B4', 'B4'], 
+    'C':['C1', 'C2', 'C3', 'C3', 'C3'], 
+    'D':['D1', 'D2', 'D2', 'D2', 'D2'], 
+    'E':['E1', 'E1', 'E1', 'E1', 'E1'] }
+  
+# Convert the dictionary into DataFrame 
+df = pd.DataFrame(data)
+  
+# Get the unique values of 'B' column
+df.B.unique()
+
+Q7. How do you find the number of missing values in each column of a Pandas DataFrame?
+
+--> To get the count of missing values in each column of a dataframe, you can use the pandas isnull() and sum() functions together. The following is the syntax:
+
+# count of missing values in each column
+df.isnull().sum()
+
+Q8. How do you fill missing values in a Pandas DataFrame with a specific value?
+
+--> df = df.fillna(df.median())
+
+Q9. How do you concatenate two Pandas DataFrames?
+
+--> import pandas as pd
+import numpy as np
+
+df1 = pd.DataFrame(np.random.randint(25, size=(4, 4)),
+				index=["1", "2", "3", "4"],
+				columns=["A", "B", "C", "D"])
+
+df2 = pd.DataFrame(np.random.randint(25, size=(6, 4)),
+				index=["5", "6", "7", "8", "9", "10"],
+				columns=["A", "B", "C", "D"])
+
+df3 = pd.DataFrame(np.random.randint(25, size=(4, 4)),
+				columns=["A", "B", "C", "D"])
+
+df4 = pd.DataFrame(np.random.randint(25, size=(4, 4)),
+				columns=["E", "F", "G", "H"])
+
+display(df1, df2, df3, df4)
+
+ concatenating df1 and df2 along rows
+vertical_concat = pd.concat([df1, df2], axis=0)
+
+ concatenating df3 and df4 along columns
+horizontal_concat = pd.concat([df3, df4], axis=1)
+
+display(vertical_concat, horizontal_concat)
+
+
+Q10. How do you merge two Pandas DataFrames on a specific column?
+
+--> # importing modules
+import pandas as pd
+
+# creating a dataframe
+df1 = pd.DataFrame({'Name':['Raju', 'Rani', 'Geeta', 'Sita', 'Sohit'],
+					'Marks':[80, 90, 75, 88, 59]})
+
+# creating another dataframe with different data
+df2 = pd.DataFrame({'Name':['Raju', 'Divya', 'Geeta', 'Sita'],
+					'Grade':['A', 'A', 'B', 'A'],
+					'Rank':[3, 1, 4, 2 ],
+					'Gender':['Male', 'Female', 'Female', 'Female']})
+# display df1
+display(df1)
+
+# display df2
+display(df2)
+# applying merge
+df1.merge(df2[['Name', 'Grade', 'Rank']])
+
+
+Q11. How do you group data in a Pandas DataFrame by a specific column and apply an aggregation function?
+
+--> You can group data in a Pandas DataFrame by a specific column and apply an aggregation function using the groupby() method. Here’s an example:
+
+import pandas as pd
+
+df = pd.DataFrame({
+    'A': ['foo', 'bar', 'foo', 'bar', 'foo', 'bar', 'foo', 'foo'],
+    'B': ['one', 'one', 'two', 'three', 'two', 'two', 'one', 'three'],
+    'C': [1, 2, 3, 4, 5, 6, 7, 8],
+    'D': [10, 9, 8, 7, 6, 5, 4, 3]
+})
+
+grouped = df.groupby('A').agg({'B': ['min'], 'C': ['sum']})
+print(grouped)
+
+Q12. How do you pivot a Pandas DataFrame?
+
+--> # Create a simple dataframe
+
+# importing pandas as pd
+import pandas as pd
+
+# creating a dataframe
+df = pd.DataFrame({'A': ['John', 'Boby', 'Mina'],
+	'B': ['Masters', 'Graduate', 'Graduate'],
+	'C': [27, 23, 21]})
+
+df
+# values can be an object or a list
+df.pivot('A', 'B', 'C')
+
+
+Q13. How do you change the data type of a column in a Pandas DataFrame?
+
+--> # importing the pandas library
+import pandas as pd
+
+# creating a DataFrame
+df = pd.DataFrame({'srNo': [1, 2, 3],
+				'Name': ['Geeks', 'for',
+							'Geeks'],
+				'id': [111, 222,
+						333]})
+# changing the dataframe
+# data types to string
+df = df.astype(str)
+
+# show the data types of dataframe
+
+df.dtypes
+
+
+Q14. How do you sort a Pandas DataFrame by a specific column?
+
+--> # importing pandas library
+import pandas as pd
+
+# creating and initializing a nested list
+age_list = [['Afghanistan', 1952, 8425333, 'Asia'],
+			['Australia', 1957, 9712569, 'Oceania'],
+			['Brazil', 1962, 76039390, 'Americas'],
+			['China', 1957, 637408000, 'Asia'],
+			['France', 1957, 44310863, 'Europe'],
+			['India', 1952, 3.72e+08, 'Asia'],
+			['United States', 1957, 171984000, 'Americas']]
+
+# Sorting by column 'Country'
+df.sort_values(by=['Country'])
+
+
+Q15. How do you create a copy of a Pandas DataFrame?
+
+--> You can create a copy of a Pandas DataFrame using the copy() method. The copy() method creates a deep copy by default. You can also create a shallow copy by passing the argument deep=False.
+
+Here is an example of how to create a deep copy of a Pandas DataFrame:
+
+import pandas as pd
+
+df = pd.DataFrame({'A': [1, 2], 'B': [3, 4]})
+df_copy = df.copy()
+
+Q16. How do you filter rows of a Pandas DataFrame by multiple conditions?
+
+--> import pandas as pd
+df = pd.DataFrame({'risk':['Small','High','Medium','Negligible', 'Very High']})
+df
+
+
+
+         risk
+0       Small
+1        High
+2      Medium
+3  Negligible
+4   Very High
+
+[5 rows x 1 columns]
+
+In [6]:
+
+df[df.risk.isin(['Small','Medium','High'])]
+
+
+
+     risk
+0   Small
+1    High
+2  Medium
+
+[3 rows x 1 columns]
+
+Q17. How do you calculate the mean of a column in a Pandas DataFrame?
+
+--> #create DataFrame
+df = pd.DataFrame({'player': ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'],
+                   'points': [25, 20, 14, 16, 27, 20, 12, 15, 14, 19],
+                   'assists': [5, 7, 7, 8, 5, 7, 6, 9, 9, 5],
+                   'rebounds': [np.nan, 8, 10, 6, 6, 9, 6, 10, 10, 7]})
+
+We can find the mean of the column titled “points” by using the following syntax:
+
+df['points'].mean()
+
+18.2
+
+Q18. How do you calculate the standard deviation of a column in a Pandas DataFrame?
+
+--> #create DataFrame
+df = pd.DataFrame({'team': ['A', 'A', 'B', 'B', 'B', 'B', 'C', 'C'],
+                   'points': [25, 12, 15, 14, 19, 23, 25, 29],
+                   'assists': [5, 7, 7, 9, 12, 9, 9, 4],
+                   'rebounds': [11, 8, 10, 6, 6, 5, 9, 12]})
+
+#calculate standard deviation of 'points' column
+df['points'].std() 
+
+6.158617655657106
+
+Q19. How do you calculate the correlation between two columns in a Pandas DataFrame?
+
+--> Correlation is used to summarize the strength and direction of the linear association between two quantitative variables. It is denoted by r and values between
+ -1 and +1. A positive value for r indicates a positive association, and a negative value for r indicates a negative association.
+Ex: # import pandas module
+import pandas as pd
+
+# create dataframe with 3 columns
+data = pd.DataFrame({
+	"column1": [12, 23, 45, 67],
+	"column2": [67, 54, 32, 1],
+	"column3": [34, 23, 56, 23]
+}
+)
+# get correlation between element wise
+print(data.corr())
+
+
+Q20. How do you select specific columns in a DataFrame using their labels?
+
+--> To access specific columns of a DataFrame with their columns labels, directly use DataFrame[~] or use the DataFrame.loc property.
+
+Example
+Consider the following DataFrame:
+
+df = pd.DataFrame({"A":[3,4],"B":[5,6]}, index=["a","b"])
+df
+   A  B
+a  3  5
+b  4  6
+filter_none
+Accessing a single column
+To access a single column:
+
+df["A"]
+a    3
+b    4
+Name: A, dtype: int64
+filter_none
+We could also use the loc property, which is slightly more verbose:
+
+df.loc[:,"A"]
+a    3
+b    4
+Name: A, dtype: int64
+
+Q21. How do you select specific rows in a DataFrame using their indexes?
+
+--> # import pandas
+import pandas as pd
+
+# List of Tuples
+employees = [('Stuti', 28, 'Varanasi', 20000),
+			('Saumya', 32, 'Delhi', 25000),
+			('Aaditya', 25, 'Mumbai', 40000),
+			('Saumya', 32, 'Delhi', 35000),
+			('Saumya', 32, 'Delhi', 30000),
+			('Saumya', 32, 'Mumbai', 20000),
+			('Aaditya', 40, 'Dehradun', 24000),
+			('Seema', 32, 'Delhi', 70000)
+			]
+
+# Create a DataFrame object from list
+df = pd.DataFrame(employees,
+				columns =['Name', 'Age',
+						'City', 'Salary'])
+
+# Using the operator [] to
+# select multiple columns
+result = df[["Name", "Age", "Salary"]]
+
+# Show the dataframe
+result
+
+
+Q22. How do you sort a DataFrame by a specific column?
+
+--> # importing pandas library
+import pandas as pd
+
+# creating and initializing a nested list
+age_list = [['Afghanistan', 1952, 8425333, 'Asia'],
+			['Australia', 1957, 9712569, 'Oceania'],
+			['Brazil', 1962, 76039390, 'Americas'],
+			['China', 1957, 637408000, 'Asia'],
+			['France', 1957, 44310863, 'Europe'],
+			['India', 1952, 3.72e+08, 'Asia'],
+			['United States', 1957, 171984000, 'Americas']]
+
+# creating a pandas dataframe
+df = pd.DataFrame(age_list, columns=['Country', 'Year',
+									'Population', 'Continent'])
+
+df
+
+In order to sort the data frame in pandas, function sort_values() is used. Pandas sort_values() can sort the data frame in Ascending or Descending order.
+Ascending order
+
+# Sorting by column 'Country'
+df.sort_values(by=['Country'])
+
+discending order
+# Sorting by column "Population"
+df.sort_values(by=['Population'], ascending=False)
+
+
+
+Q23. How do you create a new column in a DataFrame based on the values of another column?
+
+-->  importing pandas as pd
+import pandas as pd
+
+ Creating the DataFrame
+df = pd.DataFrame({'Date':['10/2/2011', '11/2/2011', '12/2/2011', '13/2/2011'],
+					'Event':['Music', 'Poetry', 'Theatre', 'Comedy'],
+					'Cost':[10000, 5000, 15000, 2000]})
+
+ Print the dataframe
+print(df)
+
+# using apply function to create a new column
+df['Discounted_Price'] = df.apply(lambda row: row.Cost -
+								(row.Cost * 0.1), axis = 1)
+
+# Print the DataFrame after addition
+# of new column
+print(df)
+
+
+
+Q24. How do you remove duplicates from a DataFrame?
+
+--> To remove duplicates from the DataFrame, you may use the following syntax 
+df.drop_duplicates()
+ex: import pandas as pd
+
+boxes = {'Color': ['Green','Green','Green','Blue','Blue','Red','Red','Red'],
+         'Shape': ['Rectangle','Rectangle','Square','Rectangle','Square','Square','Square','Rectangle']
+        }
+df = pd.DataFrame(boxes, columns = ['Color', 'Shape'])
+
+df_duplicates_removed = df.drop_duplicates()
+print(df_duplicates_removed)
+
+Q25. What is the difference between .loc and .iloc in Pandas?
+
+-->  loc() and iloc() are one of those methods. These are used in slicing data from the Pandas DataFrame. They help in the convenient selection of data from the DataFrame in Python.
+ They are used in filtering the data according to some conditions
+Python loc() function
+The loc() function is label based data selecting method which means that we have to pass the name of the row or column which we want to select. This method includes the last 
+element of the range passed in it, unlike iloc(). loc() can accept the boolean data unlike iloc()
+
+
+ creating a sample dataframe
+data = pd.DataFrame({'Brand': ['Maruti', 'Hyundai', 'Tata',
+							'Mahindra', 'Maruti', 'Hyundai',
+							'Renault', 'Tata', 'Maruti'],
+					'Year': [2012, 2014, 2011, 2015, 2012,
+							2016, 2014, 2018, 2019],
+					'Kms Driven': [50000, 30000, 60000,
+									25000, 10000, 46000,
+									31000, 15000, 12000],
+					'City': ['Gurgaon', 'Delhi', 'Mumbai',
+							'Delhi', 'Mumbai', 'Delhi',
+							'Mumbai', 'Chennai', 'Ghaziabad'],
+					'Mileage': [28, 27, 25, 26, 28,
+								29, 24, 21, 24]})
+
+selecting cars with brand 'Maruti' and Mileage > 25
+display(data.loc[(data.Brand == 'Maruti') & (data.Mileage > 25)])
+
+
+
